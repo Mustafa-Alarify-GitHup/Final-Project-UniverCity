@@ -230,7 +230,17 @@ class Result_Controller extends GetxController {
     }
 
 
-    // Updata Data == price
+
+    print('puble : $array_');
+
+
+    Get_Data_Inheritance();
+    // update();
+  }
+
+  DDD(){
+    // Update Data == price
+
     for (int i = 0; i < data.length; i++) {
       switch(data[i]['type'])
       {
@@ -256,19 +266,8 @@ class Result_Controller extends GetxController {
         case "زوج" :Updata_In(array_mony[husband], data[i]['Inh_id']);break;
         case "زوجه" :Updata_In(array_mony[wife], data[i]['Inh_id']);break;
       }
-
-
     }
-    // // developer
-    // for (int i = 0; i < array_.length; i++) {
-    //   print(array_mony[i]);
-    // }
-    // print("---------------------------------------");
-    // for (int i = 0; i < array_.length; i++) {
-    //   print(array_[i]);
-    // }
-    //
-    Get_Data_Inheritance();
   }
+
 } // end class
 

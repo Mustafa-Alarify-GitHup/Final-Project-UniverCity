@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mustafa/My_pro.dart';
+import 'package:mustafa/Proposals/Proposals.dart';
 import 'package:mustafa/Rusults/Card_Ruselt.dart';
 import 'package:mustafa/Rusults/Result_Controller.dart';
 
@@ -12,7 +13,11 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Result_Controller controller = Get.put(Result_Controller());
+
     controller.Division_Inheritance(data);
+    controller.DDD();
+    print(controller.array_mony);
+
     return Scaffold(
         appBar: AppBar(
           title: CircleAvatar(
@@ -29,27 +34,30 @@ class Result extends StatelessWidget {
               style: TextStyle(fontSize: 35),
             ),
             Expanded(
-              child: GetBuilder(
-                  init: Result_Controller(),
-                  builder: (con){return
-                Container(
-                  width: full,
-                  child: controller.lodding
-                      ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                      : ListView.builder(
-                      itemCount: controller.data.length,
-                      itemBuilder: (context, index) {
-                        return Card_Ruslt(
-                            name: controller.data[index]['Inh_name'],
-                            price: controller.data[index]['price'],
-                            type: controller.data[index]['type'],
-                            N: "100");
-                      }),
-                );
-              })
-            ),
+                child: GetBuilder(
+                    init: Result_Controller(),
+                    builder: (con) {
+                      return Container(
+                        width: full,
+                        child: controller.lodding
+                            ? Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : ListView.builder(
+                                itemCount: controller.data.length,
+                                itemBuilder: (context, index) {
+                                  return Card_Ruslt(
+                                      name: controller.data[index]['Inh_name'],
+                                      price: controller.data[index]['price'],
+                                      type: controller.data[index]['type'],
+                                      N: "100");
+                                }),
+                      );
+                    })),
+            btn("مقترح للقسمه", co2, 22, true, () {
+              Get.to(() => Proposals());
+            }),
+            btn("التقارير", co2, 22, true, () {}),
           ],
         ));
   }

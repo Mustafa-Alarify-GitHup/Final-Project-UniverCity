@@ -41,7 +41,7 @@ class Controller_inheritance extends GetxController {
   }
 
 Move_Scand_page(){
-    Get.to(Result(data: data,));
+    Get.to(()=>Result(data: data,));
 }
 
 }
