@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mustafa/API/Api.dart';
 import 'package:mustafa/API/Links.dart';
-import 'package:mustafa/Rusults/Ruesult.dart';
 
-import '../../My_pro.dart';
+import '../5_Rusults/Ruesult.dart';
+import '../My_pro.dart';
 
 class Controller_inheritance extends GetxController {
   List data = [];

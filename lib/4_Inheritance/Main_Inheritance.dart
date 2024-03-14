@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mustafa/Inheritance/Widget/Widget%20DropDown.dart';
-import '../../My_pro.dart';
-import '../Controller/Controller_inheritance.dart';
+import 'package:mustafa/4_Inheritance/Widget/Widget%20DropDown.dart';
+import '../My_pro.dart';
+import 'Controller_inheritance.dart';
 
 class Main_inheritance extends StatelessWidget {
 

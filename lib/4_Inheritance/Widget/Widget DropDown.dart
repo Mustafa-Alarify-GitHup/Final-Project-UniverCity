@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mustafa/My_pro.dart';
-import '../Controller/Controller_inheritance.dart';
+import '../Controller_inheritance.dart';
 
 const List<String> list_DropDown = <String>[
   'ام',

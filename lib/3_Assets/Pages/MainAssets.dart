@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mustafa/3_Assets/Pages/Add_Assets.dart';
+import 'package:mustafa/4_Inheritance/Main_Inheritance.dart';
 import 'package:mustafa/API/Api.dart';
 import 'package:mustafa/API/Links.dart';
-import 'package:mustafa/Inheritance/Pages/Main_Inheritance.dart';
 import 'package:mustafa/SherdRefrance/shared_preferences.dart';
 import '../../My_pro.dart';
 
