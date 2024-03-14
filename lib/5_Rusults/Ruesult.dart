@@ -29,7 +29,7 @@ class Result extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(
+            const Text(
               "تقرير القسمه",
               style: TextStyle(fontSize: 35),
             ),
