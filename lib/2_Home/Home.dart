@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   TextEditingController c = TextEditingController();
   bool fouesMale = false;
   bool fouesFamale = false;
-  int sex = 0;
+  int sex = 3;
   String sexstring = "";
 
   @override
@@ -36,51 +36,66 @@ class _HomeState extends State<Home> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    txt("ذكر", co1, fouesMale == false ? 25 : 35, true),
-                    Radio(
-                      value: "male",
-                      groupValue: sex,
-                      onChanged: (val) {
-                        print(val);
-
-                        setState(() {
-                          sexstring = val as String;
-                          sex = 1;
-                          fouesMale = true;
-                          fouesFamale = false;
-                        });
-                      },
-                      activeColor: co1,
-                    ),
-                    SizedBox(
+                    InkWell(
+                        onTap: () {
+                          setState(() {
+                            sex = 1;
+                            fouesMale = true;
+                            fouesFamale = false;
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            txt("ذكر", co1, fouesMale == false ? 25 : 35, true),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(200),
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  color: sex == 1 ? co1 : Colors.white),
+                            ),
+                          ],
+                        )),
+                    const SizedBox(
                       width: 40,
                     ),
-                    txt("أنثئ", co1, fouesFamale == false ? 25 : 35, true),
-                    Radio(
-                        activeColor: co1,
-                        value: "famale",
-                        groupValue: sex,
-                        onChanged: (val) {
-                          print(val);
+                    InkWell(
+                        onTap: () {
                           setState(() {
-                            sexstring = val as String;
                             sex = 0;
                             fouesMale = false;
                             fouesFamale = true;
                           });
-                        }),
+                        },
+                        child: Row(
+                          children: [
+                            txt("أنثئ", co1, fouesFamale == false ? 25 : 35,
+                                true),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(200),
+                                  border:
+                                      Border.all(color: Colors.black, width: 2),
+                                  color: sex == 0 ? co1 : Colors.white),
+                            ),
+                          ],
+                        )),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Text_Field(c, TextInputType.name, "حصر وراثي", 5),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               btn("التالي", co2, 25, true, () async {
-                if (name_deat.text != "") {
+                if (name_deat.text != "" && sex != 3) {
                   var ruslt = await Api.postData(
                       LinkApp.Death, {"name": name_deat.text, "sex": '$sex'});
                   if (ruslt["status"] == "true") {

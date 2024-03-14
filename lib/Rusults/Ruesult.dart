@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mustafa/My_pro.dart';
-import 'package:mustafa/Proposals/Proposals.dart';
 import 'package:mustafa/Rusults/Card_Ruselt.dart';
 import 'package:mustafa/Rusults/Result_Controller.dart';
 
@@ -15,8 +14,7 @@ class Result extends StatelessWidget {
     Result_Controller controller = Get.put(Result_Controller());
 
     controller.Division_Inheritance(data);
-    controller.DDD();
-    print(controller.array_mony);
+
 
     return Scaffold(
         appBar: AppBar(
@@ -44,19 +42,19 @@ class Result extends StatelessWidget {
                                 child: CircularProgressIndicator(),
                               )
                             : ListView.builder(
-                                itemCount: controller.data.length,
+                                itemCount: controller.data_in.length,
                                 itemBuilder: (context, index) {
                                   return Card_Ruslt(
-                                      name: controller.data[index]['Inh_name'],
-                                      price: controller.data[index]['price'],
-                                      type: controller.data[index]['type'],
+                                      name: controller.data_in[index]['Inh_name'],
+                                      price: controller.data_in[index]['price'],
+                                      type: controller.data_in[index]['type'],
                                       N: "100");
                                 }),
                       );
                     })),
-            btn("مقترح للقسمه", co2, 22, true, () {
-              Get.to(() => Proposals());
-            }),
+            // btn("مقترح للقسمه", co2, 22, true, () {
+            //   Get.to(() => Proposals());
+            // }),
             btn("التقارير", co2, 22, true, () {}),
           ],
         ));

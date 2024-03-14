@@ -5,6 +5,8 @@ import 'package:mustafa/SherdRefrance/shared_preferences.dart';
 
 class Result_Controller extends GetxController {
 
+
+
   bool lodding =true;
 
   double mony = 0;
@@ -100,22 +102,23 @@ class Result_Controller extends GetxController {
   });
 }
 
-  List data = [];
+  List data_in = [];
   Get_Data_Inheritance() async {
-    var id = await shared.getData(shared.key_ID);
-    data.clear();
-    var ruslt = await Api.postData(LinkApp.get_Data_Inheritance, {"id": '$id'});
+      var id = await shared.getData(shared.key_ID);
+      data_in.clear();
+      var ruslt = await Api.postData(LinkApp.get_Data_Inheritance, {"id": '$id'});
 
-    if (ruslt["status"] == "true") {
-      data.addAll(ruslt["data"]);
-      lodding = false;
-      update();
+      if (ruslt["status"] == "true") {
+        data_in.addAll(ruslt["data"]);
+        lodding=false;
+        update();
+
     }
   }
 
   Division_Inheritance(data)async {
-    lodding = true;
-    Get_Items();
+
+   await Get_Items();
     for(int i =0;i<data.length;i++){
       var type =data[i]["type"];
       switch(type)
@@ -143,6 +146,7 @@ class Result_Controller extends GetxController {
         case "زوجه" :array_[wife]++;break;
       }// end Switch
     }// end for
+
 
     if (array_[father] > 0) array_[father] = 1;
     if (array_[mather] > 0) array_[mather] = 1;
@@ -175,6 +179,7 @@ class Result_Controller extends GetxController {
         array_mony[father] = mony / 6;
         ruslt_mony -= mony / 6;
       }
+
     }if (array_[grand_father] > 0 && array_[father]==0) {
       if (array_[son] > 0 || array_[daughter] > 0) {
         array_mony[grand_father] = mony / 6;
@@ -182,7 +187,7 @@ class Result_Controller extends GetxController {
       }
     }
 
-      // mather & grand_mather
+    // mather & grand_mather
     if (array_[mather] > 0) {
       if (array_[son] > 0 || array_[daughter] > 0) {
         array_mony[mather] = mony / 6;
@@ -203,8 +208,19 @@ class Result_Controller extends GetxController {
         ruslt_mony -= mony / 8;
       }else{
         double velue = mony/4;
-        array_mony[wife]=velue/array_[wife];
+        array_mony[wife] = velue/array_[wife];
         ruslt_mony -= mony / 4;
+
+        if (array_[father] > 0 && array_[mather]>0){
+          array_mony[father] = ruslt_mony / 2;
+          array_mony[mather] = ruslt_mony / 2;
+        }
+        else if(array_[father] > 0 ){
+          array_mony[father] = ruslt_mony;
+        }
+        else if(array_[mather] > 0 ){
+          array_mony[mather] = ruslt_mony;
+        }
       }
     }
 
@@ -219,7 +235,7 @@ class Result_Controller extends GetxController {
       }
     }
 
-  // childern
+    // childern
     if (array_[son] > 0 || array_[daughter] > 0) {
       int number_daughter = array_[daughter];
       int numberSon = array_[son] * 2;
@@ -231,17 +247,9 @@ class Result_Controller extends GetxController {
 
 
 
-    print('puble : $array_');
 
 
-    Get_Data_Inheritance();
-    // update();
-  }
-
-  DDD(){
-    // Update Data == price
-
-    for (int i = 0; i < data.length; i++) {
+     for (int i = 0; i < data.length; i++) {
       switch(data[i]['type'])
       {
         case "ام" :Updata_In(array_mony[mather], data[i]['Inh_id']);break;
@@ -267,7 +275,10 @@ class Result_Controller extends GetxController {
         case "زوجه" :Updata_In(array_mony[wife], data[i]['Inh_id']);break;
       }
     }
+   await Get_Data_Inheritance();
+    print(array_mony);
   }
+
 
 } // end class
 
