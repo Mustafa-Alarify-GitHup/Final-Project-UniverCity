@@ -21,38 +21,50 @@ class Controller_Proposals extends GetxController {
     update();
   }
 
-  List All_items_ = [];
-  List M_items = [];
+  Map All_items_ = {};
+  Map M_items = {};
 
   var random = Random();
 
- Map<String, String> Loop_Items(data_Items, price) {
-    Map<String, String> map_data = {};
+  Loop_Items(data_Items, price) {
+    Map map_data = {};
 
     for (int i = 0; i < data_Items.length; i++) {
-
       if (double.parse(data_Items[i]['item_price']) <= price) {
-
-        map_data["${data_Items[i]['item_name']}"] = "${data_Items[i]['item_price']}";
+        map_data["$i"] = {
+          "name": "${data_Items[i]['item_name']}",
+          "price": "${data_Items[i]['item_price']}",
+        };
       }
     }
     return map_data;
   }
 
   Get_one_items(price, index) {
-    Map<String, String> map_data = Loop_Items(data_Items, price);
+    Map map_data = Loop_Items(data_Items, price);
 
-    List list_convert_map = [];
-    All_items_.clear();
+    // print("==============HHHHHH=======================");
+    print(map_data);
+    print("=====================================");
 
-    list_convert_map = map_data.entries.toList();
-    var index_Random = random.nextInt(map_data.length);
+    for (int i = 0; i < map_data.length; i++) {
+      var index_Random = random.nextInt(map_data.length);
 
-    print("================================================");
-    print("================================================");
-    print(list_convert_map[index_Random]);
-    print("================================================");
-    print("================================================");
+      All_items_['$i'] = map_data['$index_Random'];
+
+      price -= double.parse(All_items_['price']);
+      map_data = Loop_Items(data_Items, price);
+
+      print("==============\t$i\t=======================");
+      print(map_data['$index_Random']);
+      print(price);
+      print("=====================================");
+    }
+    print("ZZZZZZZZZZZZZZZZZZZZZZZZZ");
+    print(All_items_);
+    print("ZZZZZZZZZZZZZZZZZZZZZZZZZ");
+
+    print(map_data);
     return Column(
       children: [],
     );
