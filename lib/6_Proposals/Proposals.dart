@@ -29,7 +29,7 @@ class Proposals extends StatelessWidget {
             Expanded(
                 child: Container(
               child: GetBuilder(
-                init: Controller_Proposals(),
+                  init: Controller_Proposals(),
                   builder: (context) => controller.lodding
                       ? const Center(
                           child: CircularProgressIndicator(),
@@ -37,11 +37,11 @@ class Proposals extends StatelessWidget {
                       : ListView.builder(
                           itemCount: controller.data_In.length,
                           itemBuilder: (context, index) => Card_Proposals(
-                              name: controller.data_In[index]["Inh_name"],
-                              type: controller.data_In[index]["type"],
-                          widget: ListView(),
-                          ))),
-
+                                name: controller.data_In[index]["Inh_name"],
+                                type: controller.data_In[index]["type"],
+                                price:controller.data_In[index]["price"] ,
+                                widget: controller.Get_one_items(double.parse(controller.data_In[index]["price"]), index)
+                              ))),
             )),
             btn("مقترح اخر", co2, 22, true, () {}),
             btn("التقارير", co2, 22, true, () {}),

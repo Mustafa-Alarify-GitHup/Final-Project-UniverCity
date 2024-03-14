@@ -12,7 +12,6 @@ class Result_Controller extends GetxController {
   double mony = 0;
   double ruslt_mony = 0;
 
-  List final_data=[];
 
 // Index
   // 'ام',
@@ -119,7 +118,7 @@ class Result_Controller extends GetxController {
   Division_Inheritance(data)async {
 
    await Get_Items();
-    for(int i =0;i<data.length;i++){
+    for (int i = 0; i < data.length; i++) {
       var type =data[i]["type"];
       switch(type)
       {
@@ -202,8 +201,8 @@ class Result_Controller extends GetxController {
 
     // Wife
     if(array_[wife]>0){
-      if(array_[son] > 0 || array_[daughter] > 0){
-        double velue = mony/8;
+      if (array_[son] > 0 || array_[daughter] > 0) {
+        double velue = mony / 8;
         array_mony[wife] = velue / array_[wife];
         ruslt_mony -= mony / 8;
       } else {

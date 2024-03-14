@@ -4,9 +4,11 @@ import 'package:mustafa/My_pro.dart';
 class Card_Proposals extends StatelessWidget {
 final String name;
 final String type;
+final String price;
 final Widget widget;
 
-  const Card_Proposals({super.key, required this.name, required this.type, required this.widget});
+  const Card_Proposals({super.key, required this.name, required this.type, required this.price, required this.widget});
+
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +99,7 @@ final Widget widget;
               ),
             ],
           ),
+          Text(price),
           const SizedBox(
             height: 11,
           ),
