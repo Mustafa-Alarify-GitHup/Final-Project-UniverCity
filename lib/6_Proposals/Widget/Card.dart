@@ -99,7 +99,6 @@ final Widget widget;
               ),
             ],
           ),
-          Text(price),
           const SizedBox(
             height: 11,
           ),

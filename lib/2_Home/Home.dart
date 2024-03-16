@@ -23,7 +23,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
+      child: Scaffold(        backgroundColor: Colors.grey[200],
+
           body: Container(
         width: full,
         child: SingleChildScrollView(

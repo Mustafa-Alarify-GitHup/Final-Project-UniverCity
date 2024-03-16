@@ -1,10 +1,10 @@
 import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mustafa/API/Api.dart';
 import 'package:mustafa/API/Links.dart';
 import 'package:mustafa/SherdRefrance/shared_preferences.dart';
+import '../My_pro.dart';
 
 class Controller_Proposals extends GetxController {
   bool lodding = true;
@@ -21,63 +21,113 @@ class Controller_Proposals extends GetxController {
     update();
   }
 
-  Map All_items_ = {};
-  Map M_items = {};
+  List item_Name = [];
+  List item_Price = [];
+  List item_BookedUp = [];
 
   var random = Random();
 
   Loop_Items(data_Items, price) {
-    Map map_data = {};
+    item_Name.clear();
+    item_Price.clear();
+
+    Find_In_List_item_BookedUp(value) {
+      if (item_BookedUp.length == 0) {
+        return true;
+      } else {
+        for (int i = 0; i < item_BookedUp.length; i++) {
+          if (value == item_BookedUp[i]) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
 
     for (int i = 0; i < data_Items.length; i++) {
-      if (double.parse(data_Items[i]['item_price']) <= price) {
-        map_data["$i"] = {
-          "name": "${data_Items[i]['item_name']}",
-          "price": "${data_Items[i]['item_price']}",
-        };
+      if (double.parse(data_Items[i]['item_price']) <= price &&
+          Find_In_List_item_BookedUp(data_Items[i]['item_name'])) {
+        item_Name.add(data_Items[i]["item_name"]);
+        item_Price.add(data_Items[i]["item_price"]);
       }
     }
-    return map_data;
   }
 
-  Get_one_items(price, index) {
-    Map map_data = Loop_Items(data_Items, price);
+  Get_one_items(price, context) {
+    Loop_Items(data_Items, price);
 
-    // print("==============HHHHHH=======================");
-    print(map_data);
-    print("=====================================");
+    List item_Name_In = [];
+    List item_Price_In = [];
 
-    for (int i = 0; i < map_data.length; i++) {
-      var index_Random = random.nextInt(map_data.length);
+    for (int i = 0; i < item_Name.length; i++) {
+      int index_Random = random.nextInt(item_Name.length);
 
-      All_items_['$i'] = map_data['$index_Random'];
+      var value_Booked = item_Name[index_Random];
+      bool can_Take = true;
 
-      price -= double.parse(All_items_['price']);
-      map_data = Loop_Items(data_Items, price);
+      for (int x = 0; x < item_BookedUp.length; x++) {
+        if (value_Booked == item_BookedUp[x]) {
+          can_Take = false;
+        } else {
+          can_Take = true;
+        }
+      }
 
-      print("==============\t$i\t=======================");
-      print(map_data['$index_Random']);
-      print(price);
-      print("=====================================");
+      if (can_Take && price >= double.parse(item_Price[index_Random])) {
+        price -= double.parse(item_Price[index_Random]);
+        item_Name_In.add(item_Name[index_Random]);
+        item_Price_In.add(item_Price[index_Random]);
+        item_BookedUp.add(item_Name[index_Random]);
+      }
     }
-    print("ZZZZZZZZZZZZZZZZZZZZZZZZZ");
-    print(All_items_);
-    print("ZZZZZZZZZZZZZZZZZZZZZZZZZ");
-
-    print(map_data);
     return Column(
-      children: [],
+      children: [
+        ...List.generate(
+            item_Price_In.length,
+            (index) => Row(
+                  children: [
+                    Expanded(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "${item_Name_In[index]}",
+                              style: TextStyle(fontSize: 18),
+                            ))),
+                    Expanded(
+                        child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              "${item_Price_In[index]}",
+                              style: TextStyle(fontSize: 18),
+                            ))),
+                  ],
+                )),
+        Divider(
+          color: co1,
+          height: 2,
+          endIndent: 10,
+          indent: 10,
+        ),
+        Row(
+          children: [
+            Expanded(
+                child: Container(
+                    alignment: Alignment.center,
+                    child: const Text(
+                      "المبلغ المتبقي",
+                      style: TextStyle(fontSize: 18),
+                    ))),
+            Expanded(
+                child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "${price.toString().length > 5 ? price.toString().substring(0, 5) : price}",
+                      style: TextStyle(fontSize: 20),
+                    ))),
+          ],
+        )
+      ],
     );
-
-    // if(double.parse(data_Items[index]["item_price"]) < price){
-    //   return Row(
-    //     children: [
-    //       Text("${data_Items[index]["item_price"]}"),
-    //       Text("${data_Items[index]["item_name"]}"),
-    //     ],
-    //   );
-    // }
-    // return Text("Noooo");
   }
 
   Get_Data_Inheritance() async {
@@ -87,10 +137,11 @@ class Controller_Proposals extends GetxController {
 
     if (res["status"] == "true") {
       data_In.addAll(res["data"]);
-      print("===============");
-      print(data_In);
-      print("===============");
-      print("===============");
     }
+  }
+
+  Updata_Page() {
+    item_BookedUp.clear();
+    update();
   }
 }

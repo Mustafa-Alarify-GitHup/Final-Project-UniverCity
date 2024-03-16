@@ -5,8 +5,6 @@ import 'package:mustafa/SherdRefrance/shared_preferences.dart';
 
 class Result_Controller extends GetxController {
 
-
-
   bool lodding =true;
 
   double mony = 0;
@@ -89,8 +87,7 @@ class Result_Controller extends GetxController {
       mony+=double.parse(respones['data'][i]['item_price']);
       ruslt_mony+=double.parse(respones['data'][i]['item_price']);
     }
-    print("=========================$mony");
-    print("=========================$ruslt_mony");
+
   }
 
 
@@ -286,7 +283,6 @@ class Result_Controller extends GetxController {
     }
     await Future.delayed(Duration(milliseconds: 1000));
     await Get_Data_Inheritance();
-    print(array_mony);
   }
 } // end class
 

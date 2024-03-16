@@ -32,7 +32,8 @@ class Add_Assets extends StatelessWidget {
         title: txt("أضافه أصل جديد", co2, 22, true),
         backgroundColor: co1,
         centerTitle: true,
-      ),
+      ),        backgroundColor: Colors.grey[200],
+
       body: SingleChildScrollView(
         child: Column(
           children: [

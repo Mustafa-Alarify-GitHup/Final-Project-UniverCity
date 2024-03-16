@@ -58,7 +58,8 @@ class _MainAsstsState extends State<MainAssts> {
             child: Image.asset("images/icon.png")),
         centerTitle: true,
         backgroundColor: co1,
-      ),
+      ),        backgroundColor: Colors.grey[200],
+
       body: loding ? Center(child: CircularProgressIndicator(),) : Column(
         children: [
           Expanded(
@@ -88,50 +89,52 @@ class _MainAsstsState extends State<MainAssts> {
                       ],
                     ),
                     /****************** Data *******************/
-                    Container(
-                      child: ListView.builder(
-                          itemCount: data.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return data.length == 0
-                                ? Container(
-                              height: 70,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[200],
-                                  border: Border.all(width: 2, color: co1)),
-                              child: Center(
-                                child: txt("لايوجد بيانات", co1, 23, true),
-                              ),
-                            )
-                                : Table(
-                              border: TableBorder.all(color: co1, width: 2),
-                              defaultVerticalAlignment:
-                              TableCellVerticalAlignment.middle,
-                              children: [
-                                TableRow(children: [
-                                  Center(
-                                      child: txt(
-                                          data[index]["item_name"], co1, 22,
-                                          true)),
-                                  Center(
-                                      child: txt(
-                                          data[index]["item_price"], co1, 22,
-                                          true)),
-                                  Center(child: txt(
-                                      data[index]["item_cat"] == "1"
-                                          ? "أصل ثابت"
-                                          : data[index]["item_cat"] == "2"
-                                          ? 'أصل عقاري'
-                                          : 'أصل نقدي',
-                                      co1, 18, true)),
-                                  Center(child: txt(
-                                      data[index]["item_iadl"] != ""
-                                          ? data[index]["item_iadl"]
-                                          : "??", co1, 18, true)),
-                                ]),
-                              ],
-                            );
-                          }),
+                    Expanded(
+                      child: Container(
+                        child: ListView.builder(
+                            itemCount: data.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              return data.length == 0
+                                  ? Container(
+                                height: 70,
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    border: Border.all(width: 2, color: co1)),
+                                child: Center(
+                                  child: txt("لايوجد بيانات", co1, 23, true),
+                                ),
+                              )
+                                  : Table(
+                                border: TableBorder.all(color: co1, width: 2),
+                                defaultVerticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                children: [
+                                  TableRow(children: [
+                                    Center(
+                                        child: txt(
+                                            data[index]["item_name"], co1, 22,
+                                            true)),
+                                    Center(
+                                        child: txt(
+                                            data[index]["item_price"], co1, 22,
+                                            true)),
+                                    Center(child: txt(
+                                        data[index]["item_cat"] == "1"
+                                            ? "أصل ثابت"
+                                            : data[index]["item_cat"] == "2"
+                                            ? 'أصل عقاري'
+                                            : 'أصل نقدي',
+                                        co1, 18, true)),
+                                    Center(child: txt(
+                                        data[index]["item_iadl"] != ""
+                                            ? data[index]["item_iadl"]
+                                            : "??", co1, 18, true)),
+                                  ]),
+                                ],
+                              );
+                            }),
+                      ),
                     ),
                   ],
                 ),

@@ -18,7 +18,8 @@ class Main_inheritance extends StatelessWidget {
             child: Image.asset("images/icon.png")),
         centerTitle: true,
         backgroundColor: co1,
-      ),
+      ),        backgroundColor: Colors.grey[200],
+
       body: Column(
         children: [
           Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mustafa/6_Proposals/Proposals.dart';
+import 'package:mustafa/7_Check_Items/Check_Items.dart';
 import 'package:mustafa/My_pro.dart';
 import 'Card_Ruselt.dart';
 import 'Result_Controller.dart';
@@ -27,6 +28,7 @@ class Result extends StatelessWidget {
           centerTitle: true,
           backgroundColor: co1,
         ),
+        backgroundColor: Colors.grey[200],
         body: Column(
           children: [
             const Text(
@@ -40,7 +42,7 @@ class Result extends StatelessWidget {
                       return Container(
                         width: full,
                         child: controller.lodding
-                            ? Center(
+                            ? const Center(
                                 child: CircularProgressIndicator(),
                               )
                             : ListView.builder(
@@ -48,17 +50,17 @@ class Result extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return  Card_Ruslt(
                                         name: controller.data_in[index]['Inh_name'],
-                                        price: controller.data_in[index]['price'],
+                                        price: controller.data_in[index]['price'].toString().substring(0,3),
                                         type: controller.data_in[index]['type'],
                                         N: ((100/controller.mony)*double.parse(controller.data_in[index]['price'])).toString().substring(0,4)
                                   );
                                 }),
                       );
                     })),
-            btn("مقترح للقسمه", co2, 22, true, () {
+            btn("اصدار مقترح للقسمه", co2, 22, true, () {
               Get.to(() => Proposals());
             }),
-            btn("التقارير", co2, 22, true, () {}),
+            btn("أختيار يدوي للموروث", co2, 22, true, () {Get.to(() => Check_Items());}),
           ],
         ));
   }
