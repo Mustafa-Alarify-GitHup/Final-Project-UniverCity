@@ -11,7 +11,7 @@ class Loding extends StatefulWidget {
 class _LodingState extends State<Loding> {
   void wait() async {
     await Future.delayed(Duration(milliseconds: 1200));
-    Get.off(mainScreen());
+    Get.off(()=>mainScreen());
   }
 
   @override
