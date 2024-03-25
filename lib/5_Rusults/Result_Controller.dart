@@ -165,39 +165,105 @@ class Result_Controller extends GetxController {
     }
     if (one == 1) {
       array_mony[index_one] = mony;
-    }// End All Mony
+    } // End All Mony
 
 
-
-    // Father & grand_father
-    if (array_[father] > 0) {
-      if (array_[son] > 0 || array_[daughter] > 0) {
-        array_mony[father] = mony / 6;
-        ruslt_mony -= mony / 6;
-      }
-
-    }if (array_[grand_father] > 0 && array_[father]==0) {
-      if (array_[son] > 0 || array_[daughter] > 0) {
-        array_mony[grand_father] = mony / 6;
-        ruslt_mony -= mony / 6;
-      }
-    }
 
     // mather & grand_mather
     if (array_[mather] > 0) {
       if (array_[son] > 0 || array_[daughter] > 0) {
         array_mony[mather] = mony / 6;
         ruslt_mony -= mony / 6;
+      } else {
+        if (array_[son] == 0 &&
+            array_[daughter] == 0 &&
+            array_[wife] == 0 &&
+            array_[husband] == 0
+            ) {
+          array_mony[mather] = mony / 3;
+          ruslt_mony -= mony / 3;
+        } else if (array_[son] == 0 &&
+            array_[daughter] == 0 &&
+            array_[wife] == 0 &&
+            array_[husband] == 1
+            ) {
+          array_mony[mather] = mony / 6;
+          ruslt_mony -= mony / 6;
+        }
       }
-    }if (array_[grand_mather] > 0 && array_[mather]==0) {
+    }
+    if (array_[grand_mather] > 0 && array_[mather] == 0) {
       if (array_[son] > 0 || array_[daughter] > 0) {
         array_mony[grand_mather] = mony / 6;
         ruslt_mony -= mony / 6;
+      } else {
+        if (array_[son] == 0 &&
+            array_[daughter] == 0 &&
+            array_[wife] == 0 &&
+            array_[husband] == 0 &&
+            array_[mather] == 0 &&
+            array_[grand_father] == 1) {
+          array_mony[grand_mather] = mony / 2;
+        } else if (array_[son] == 0 &&
+            array_[daughter] == 0 &&
+            array_[wife] == 0 &&
+            array_[husband] == 1 &&
+            array_[mather] == 0 &&
+            array_[grand_father] == 1) {
+          array_mony[grand_mather] = mony / 6;
+          ruslt_mony -= mony / 6;
+        }
       }
     }
 
-    // Wife
-    if(array_[wife]>0){
+   // Father & grand_father
+   if (array_[father] > 0) {
+     if (array_[son] > 0 || array_[daughter] > 0) {
+       array_mony[father] = mony / 6;
+       ruslt_mony -= mony / 6;
+     } else {
+       if (array_[son] == 0 &&
+           array_[daughter] == 0 &&
+           array_[wife] == 0 &&
+           array_[husband] == 0 &&
+           array_[mather] == 1) {
+         array_mony[father] = ruslt_mony;
+       } else if (array_[son] == 0 &&
+           array_[daughter] == 0 &&
+           array_[wife] == 0 &&
+           array_[husband] == 1 &&
+           array_[mather] == 1) {
+         array_mony[father] = mony / 3;
+         ruslt_mony -= mony / 3;
+       }
+     }
+   }
+   if (array_[grand_father] > 0 && array_[father] == 0) {
+     if (array_[son] > 0 || array_[daughter] > 0) {
+       array_mony[grand_father] = mony / 6;
+       ruslt_mony -= mony / 6;
+     } else {
+       if (array_[son] == 0 &&
+           array_[daughter] == 0 &&
+           array_[wife] == 0 &&
+           array_[husband] == 0 &&
+           array_[father] == 0 &&
+           array_[grand_mather] == 1) {
+         array_mony[grand_father] = mony / 2;
+       } else if (array_[son] == 0 &&
+           array_[daughter] == 0 &&
+           array_[wife] == 0 &&
+           array_[husband] == 1 &&
+           array_[father] == 0 &&
+           array_[grand_mather] == 1) {
+         array_mony[grand_father] = mony / 3;
+         ruslt_mony -= mony / 3;
+       }
+     }
+   }
+
+   // Wife
+    if (array_[wife] > 0) {
       if (array_[son] > 0 || array_[daughter] > 0) {
         double velue = mony / 8;
         array_mony[wife] = velue / array_[wife];
@@ -210,33 +276,28 @@ class Result_Controller extends GetxController {
         if (array_[father] > 0 && array_[mather] > 0) {
           array_mony[father] = ruslt_mony / 2;
           array_mony[mather] = ruslt_mony / 2;
-        }
-        else if (array_[father] > 0) {
+        } else if (array_[father] > 0) {
           array_mony[father] = ruslt_mony;
-        }
-        else if (array_[mather] > 0) {
+        } else if (array_[mather] > 0) {
           array_mony[mather] = ruslt_mony;
-        }
-        else if (array_[grand_father] > 0 && array_[grand_mather] > 0) {
+        } else if (array_[grand_father] > 0 && array_[grand_mather] > 0) {
           array_mony[grand_father] = ruslt_mony / 2;
           array_mony[grand_mather] = ruslt_mony / 2;
-        }
-        else if (array_[grand_father] > 0) {
+        } else if (array_[grand_father] > 0) {
           array_mony[grand_father] = ruslt_mony;
-        }
-        else if (array_[grand_mather] > 0) {
+        } else if (array_[grand_mather] > 0) {
           array_mony[grand_mather] = ruslt_mony;
         }
       }
     }
 
     // husband
-    if(array_[husband]==1){
-      if(array_[son] > 0 || array_[daughter] > 0){
-        array_mony[husband]=mony/4;
+    if (array_[husband] == 1) {
+      if (array_[son] > 0 || array_[daughter] > 0) {
+        array_mony[husband] = mony / 4;
         ruslt_mony -= mony / 4;
-      }else{
-        array_mony[husband]=mony/2;
+      } else {
+        array_mony[husband] = mony / 2;
         ruslt_mony -= mony / 2;
       }
     }
@@ -251,11 +312,14 @@ class Result_Controller extends GetxController {
       array_mony[daughter] = velue * 1;
     }
 
+    // brother_brother brother_father
+   if(array_[son] == 0 && array_[daughter] == 0 && array_[father]==0){
+
+   }
 
 
 
-
-     for (int i = 0; i < data.length; i++) {
+    for (int i = 0; i < data.length; i++) {
       switch(data[i]['type'])
       {
         case "ام" :Updata_In(array_mony[mather], data[i]['Inh_id']);break;

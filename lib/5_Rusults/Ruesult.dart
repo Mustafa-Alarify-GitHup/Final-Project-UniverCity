@@ -48,7 +48,7 @@ class Result extends StatelessWidget {
                                   return Card_Ruslt(
                                       name: controller.data_in[index]
                                           ['Inh_name'],
-                                      price: controller.data_in[index]['price'],
+                                      price: controller.data_in[index]['price']=="0.0"?"محجوب":controller.data_in[index]['price'],
                                       type: controller.data_in[index]['type'],
                                       N: ((100 / controller.mony) *
                                                       double.parse(
