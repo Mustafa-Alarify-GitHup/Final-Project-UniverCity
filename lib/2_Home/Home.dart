@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
                           {"name": nameDeat.text, "sex": '$sex'});
                       if (ruslt["status"] == "true") {
                         shared.setData(shared.key_Name, nameDeat.text);
-                        Get.off(MainAssts(name_Death: nameDeat.text));
+                        Get.to(MainAssts(name_Death: nameDeat.text));
                       }
                     } else {
                       Get.snackbar("تنبيه", "أدخل البيانات اولآ",

@@ -10,9 +10,10 @@ import '../5_Rusults/Ruesult.dart';
 import '../My_pro.dart';
 
 class Controller_inheritance extends GetxController {
+
   List data = [];
   bool loding = true;
-  String type = "";
+  String type = "ام";
   TextEditingController name = TextEditingController();
 
   Get_Data() async {
@@ -28,12 +29,12 @@ class Controller_inheritance extends GetxController {
 
   Add_Data() async {
     if (name.text != "") {
+
       var ruslt = await Api.postData(LinkApp.Add_Inheritance, {
         "Inh_name": name.text,
         "Inh_name_death": "${Get.arguments}",
         "type": "$type"
       });
-      print(ruslt["status"]);
       if (ruslt["status"] == "true") {
         Get_Data();
         update();
